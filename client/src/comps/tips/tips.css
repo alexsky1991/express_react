@@ -1,0 +1,33 @@
+.tips{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 40px;
+}
+
+.tips_item{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+	font-size: 11px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.tips_item_50{
+	background: url(./img/50.jpg) no-repeat center;
+	background-size: 70%;
+}
+
+.tips_item_audi{
+	background: url(./img/audi.jpg) no-repeat center;
+	background-size: 70%;
+}
+
+.tips_item_call{
+	background: url(./img/phone.jpg) no-repeat center;
+	background-size: 70%;
+}

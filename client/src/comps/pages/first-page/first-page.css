@@ -1,0 +1,26 @@
+.first {
+	position: relative;
+	height: 100%;
+	background: url(./img/bg.jpg) no-repeat center;
+	background-size: cover;
+}
+
+.first_content{
+	position: absolute;
+	bottom: 240px;
+	left: 0;
+	right: 0;
+	text-align: center;
+
+}
+
+.first_button {
+	padding: 15px 50px;
+    border-radius: 25px;
+	background: #e62626;
+	color: #fff;
+}
+
+.font{
+	font-family: 'Roboto';
+}

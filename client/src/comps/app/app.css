@@ -1,0 +1,26 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html, body, #root{
+	height: 100%;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(../../fonts/Roboto.woff) format('woff');
+}
+
+a{
+	text-decoration: none;
+}
+
+.wrapper{
+	height: 100%;
+}
+
+.font{
+	font-family: Roboto;
+	color: #fff;
+}
