@@ -4,49 +4,65 @@ const request = require('request');
 const fs = require('fs');
 const port = process.env.PORT || 5000;
 
-const questions = require("./questions.json");
+const data = require("./data.json");
 
-// console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// create a GET route
+let number = 0;
+
 app.get('/express_backend', (req, res) => {
+
+	let question = data[number];
+	number++;
+
 	res.send({ 
 		express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT',
-  		questions: questions  
+  		data: question  
   	});
 });
 
 
+const requestApi = () => (
+	request('https://engine.lifeis.porn/api/millionaire.php?q=3', (error, response, body) => {
+	    if (!error && response.statusCode == 200) {
+	    	let info = JSON.parse(body)
 
-request('https://engine.lifeis.porn/api/millionaire.php?q=3', (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-    	let info = JSON.parse(body)
-    	// console.log(info.data)
-    	console.log(info);
+	    	info = info.data
 
-    	info = info.data
+	    	fs.readFile('data.json', 'utf8', (err, data) => {
+			    if (err)
+			        console.log(err);
+			    
+			    data = JSON.parse(data); 
 
-    	fs.readFile('message.json', 'utf8', (err, data) => {
-		    if (err){
-		        console.log(err);
-		    } else {
+			    if(data.some(el => el.id === info.id))
+			    	return
+					
+			    data = [...data, info];
 
-		    let obj = JSON.parse(data); //now it an object
-				
-		    obj = [...obj, info]; //add some data
+			    json = JSON.stringify(data, null, 2); 
 
-		    json = JSON.stringify(obj); //convert it back to json
-			console.log(json);
+			    fs.writeFile('data.json', json, 'utf8', () => {
+					console.log('The file has been saved!');
+				});
+			})
+	    }
+	})
+)
 
-		    fs.writeFile('message.json', json, 'utf8', (err) => {
+requestApi();
 
-				if (err) throw err;
-				console.log('The file has been saved!');
-			}); // write it back 
-		}})
-    }
-})
+// const callNTimes = (func, num, delay) => {
+// 	if (!num) return;
+
+// 	func();
+
+// 	setTimeout(() => { callNTimes(func, num - 1, delay); }, delay);
+// }
+
+// callNTimes(requestApi, 150, 2000);
+
+
 
 
 

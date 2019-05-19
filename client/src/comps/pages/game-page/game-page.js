@@ -6,26 +6,31 @@ import Bar from '../../bar';
 
 import { Provider } from '../../context';
 
-const questions = require("./questions.json");
-
 
 export default class GamePage extends React.Component {
 
 	state = {
 		pos: 0,
-		choose: true,
-		answer: false,
+		right: '',
 		answers: [],
-		ques: [],
-		res: false
+		question: '',
+		condition: false
 	}
 
 	componentDidMount() {
     	this.callBackendAPI()
-        	.then(res => this.setState({ 
-        		ques: res.questions,
-				answers: res.questions[0].answers
-        	 }))
+        	.then(res => {
+        		let right = res.data.answers[0];
+        		let answers = res.data.answers.sort(() => 0.5 - Math.random());
+
+        		return (
+        			this.setState({ 
+		        		question: res.data.question,
+		        		right: right,
+						answers: answers
+		        	 })
+        		)
+        	})
         	.catch(err => console.log(err));
 	}
 
@@ -35,90 +40,92 @@ export default class GamePage extends React.Component {
     	const response = await fetch('/express_backend');
     	const body = await response.json();
 
-    	if (response.status !== 200) {
+    	if (response.status !== 200) 
     		throw Error(body.message) 
-      	}
-
-      	console.log(body);
-
+      	
     	return body;
 
-  	};
+  	}
 
+  	clickItem = e => {
 
-	clickItem = e => {
-		if(e.target.className !== "game_content_answer" || !this.state.choose)
-			return;
+  		let elem = e.target
 
-		this.setState({
-			choose: false,
-			answer: e.target.innerHTML
+  		if(elem.innerHTML === '')
+  			return;
 
-		}, () => setTimeout(this.check, 1000))
-	}
+  		if(elem.className !== "game_content_answer" || this.state.condition === 'choose')
+  			return
 
-	check = () => {
+  		elem.className = "game_content_answer answer_choose"
+
+  		this.setState({condition: 'choose'},
+  			() => setTimeout(() => {
+  					let pos;
+  					let right_el;
+
+	        		if(elem.innerHTML === this.state.right) {
+							elem.className = "game_content_answer answer_right"
+							pos = this.state.pos + 1
+
+	        		} else {
+	        			elem.className = "game_content_answer answer_false";
+	        			pos = 0;
+
+		  				right_el = [...document.getElementsByClassName('game_content_answer')].filter(el => el.innerHTML === this.state.right)[0];
 		
-		const {answer, pos } = this.state,
-			   answer_right = questions[pos].right; 
+		  				right_el.className = "game_content_answer answer_right";
+		  				
+	        		}
 
-		this.setState({res: true})
-		
-		setTimeout(() => {
-			const condition = answer === answer_right;
+  					this.callBackendAPI()
+			        	.then(res => {
+			        		let right = res.data.answers[0];
+			        		let answers = res.data.answers.sort(() => 0.5 - Math.random());
 
-			if(!condition)
-				alert('Вы проебали!Можно начать заново!');
+			        		return (
+			        			setTimeout(() => {
+			        				elem.className = "game_content_answer";
 
-			this.setState({
-				pos: condition ? this.state.pos + 1 : 0,
-				choose: true,
-				answer: false,
-				res: false
-			}, () => {
-				this.setState({
-					answers: this.state.ques[this.state.pos].answers
-				})
-			})	
+			        				if(right_el)
+						        		right_el.className = "game_content_answer";
 
-		}, 1000);
-	}
+				        			this.setState({ 
+						        		question: res.data.question,
+						        		right: right,
+										answers: answers,
+										pos: pos,
+	  									condition: false
+						        	})
+				        		}, 1500)
+			        		)
+			        	})
+			        	.catch(err => console.log(err));
 
-	callTip50 = () => {
-		let arr = this.state.answers.slice();
-		let { pos } = this.state;
-		let right = questions[pos].right;
-		
-		// let random = Math.random() >= 0.5;
+  			}, 1500)
+  		)
+  		
+  	}
 
-		let mount = true
+  	callTip50 = () => {
 
-		arr = arr.map((el,idx) => {
-			if(el === right)
-				return el
+  		if(this.state.condition) return
 
-			if(mount) 
-				el = ''
-			
-			mount = !mount
+		let arr = [...document.getElementsByClassName('game_content_answer')].filter(el => el.innerHTML !== this.state.right)
 
-			return el
+		let random = Math.floor(Math.random() * 3);
 
+		arr.forEach((el, idx) => {
+			if(random !== idx) 
+				el.innerHTML =''
 		})
 
-		this.setState({ answers: arr })
+		this.callTip50 = null;
 	}
+
 	
 	render() {
-		const { pos, answer, res, answers, ques } = this.state,
-				item = questions[pos];
-
-		console.log(ques)
-
-		if(ques.length < 1)
-			return 1
-
-		const question = ques[pos].question;
+		const { pos, answers, question } = this.state;
 
 		return (
 			<Provider value={this.callTip50}>
@@ -137,15 +144,6 @@ export default class GamePage extends React.Component {
 								{ 
 									answers.map((el, idx) => {
 										let className = "game_content_answer";
-
-										if(!res && el === answer) 
-											className += " answer_choose";
-
-										if(res && el === item.right) 
-											className += " answer_right";
-
-										if(res && answer !== item.right && answer === el) 
-											className += " answer_false";
 										
 										return <div key={idx} className={className}>
 												{el}

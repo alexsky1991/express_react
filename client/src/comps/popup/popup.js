@@ -5,8 +5,6 @@ import './popup.css';
 
 export default class Popup extends React.Component {
 
-
-
 	render() {
 
 		const { show } = this.props;

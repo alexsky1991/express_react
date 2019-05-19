@@ -23,6 +23,9 @@ export default class Tips extends React.Component {
 
 		// this.setState({fifty: false})
 
+		if(!this.props.callTip50)
+			return
+
 		this.props.callTip50();
 
 	}
