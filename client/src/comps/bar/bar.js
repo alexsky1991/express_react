@@ -18,7 +18,7 @@ export default class Bar extends React.Component {
 			<div className="bar">
 			
 				<Consumer>
-					{callTip50 => <Tips callTip50={callTip50}/>}
+					{callTip50 => <Tips pos={pos} callTip50={callTip50}/>}
 				</Consumer>
 				
 				<div className="bar_levels">

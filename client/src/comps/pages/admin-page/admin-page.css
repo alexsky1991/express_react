@@ -1,0 +1,53 @@
+.admin{
+	padding: 10px;
+	font-size: 13px;
+	height: 100%;
+    box-sizing: border-box;
+	background: #252222;
+	color: #e0e0e0;
+}
+
+.admin_header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.admin_header_amount{
+	background: #6d3f65;
+	padding: 5px 7px;
+	border-radius: 5px;
+	font-size: 13px;
+}
+
+.admin_title{
+	background: #a09937;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.admin_new{
+	background: #3f6d63;
+	padding: 5px 7px;
+	border-radius: 5px;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.admin_navigation{
+	display: flex;
+	justify-content: center;
+}
+
+.admin_navigation>div{
+	padding: 2px 7px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #171717;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+

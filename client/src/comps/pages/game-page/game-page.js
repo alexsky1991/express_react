@@ -4,6 +4,8 @@ import './game-page.css';
 
 import Bar from '../../bar';
 
+import {voteEvent} from '../../events'
+
 import { Provider } from '../../context';
 
 
@@ -65,12 +67,16 @@ export default class GamePage extends React.Component {
   					let right_el;
 
 	        		if(elem.innerHTML === this.state.right) {
-							elem.className = "game_content_answer answer_right"
-							pos = this.state.pos + 1
+						elem.className = "game_content_answer answer_right"
+						pos = this.state.pos + 1
+
+						voteEvent.emit('nextRound');
 
 	        		} else {
 	        			elem.className = "game_content_answer answer_false";
 	        			pos = 0;
+
+	        			voteEvent.emit('loseGame');
 
 		  				right_el = [...document.getElementsByClassName('game_content_answer')].filter(el => el.innerHTML === this.state.right)[0];
 		
@@ -120,7 +126,6 @@ export default class GamePage extends React.Component {
 				el.innerHTML =''
 		})
 
-		this.callTip50 = null;
 	}
 
 	

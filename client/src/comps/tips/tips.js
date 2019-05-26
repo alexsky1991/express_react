@@ -1,18 +1,18 @@
 import React from 'react';
 
-import Popup from '../popup'
+import Audi from '../audi'
 
 import './tips.css';
 
+import {voteEvent} from '../events'
 
 export default class Tips extends React.Component {
 
 	state = {
 		fifty: true,
 		audi: true,
-		call: true,
-		popup: false,
-		popuз_show: ''
+		audi_show: false,
+		call: true
 	}
 
 
@@ -21,7 +21,7 @@ export default class Tips extends React.Component {
 		if(!this.state.fifty)
 			return;
 
-		// this.setState({fifty: false})
+		this.setState({fifty: false})
 
 		if(!this.props.callTip50)
 			return
@@ -35,28 +35,41 @@ export default class Tips extends React.Component {
 			return;
 
 		this.setState({
-			// audi: false,
-			popup: true,
-			popup_show: 'audi'
+			audi: false,
+			audi_show: true
 		})
 	}
 
 	clickTipCall = () => {
 		this.setState({
-			popup: true,
-			popup_show: 'call'
+			call: false
 		})
 	}
 
-	closePopup = () => {
-		this.setState({
-			popup: false
-		})
+	closeAudi = () => {
+		this.setState({audi_show: false})
 	}
 
+	componentDidMount() {
+		voteEvent.addListener('loseGame', () => {
+			this.setState({
+				fifty: true,
+				audi: true,
+				call: true,
+				audi_show: false
+			})
+		})
+
+		voteEvent.addListener('nextRound', () => {
+			this.setState({
+				audi_show: false
+			})
+		})
+	}
+	
 	render() {
 
-		const { fifty, audi, popup, popup_show } = this.state; 
+		const { fifty, audi, audi_show, call } = this.state; 
 
 		return (
 			<div className="tips">
@@ -68,10 +81,10 @@ export default class Tips extends React.Component {
 					className="tips_item tips_item_audi" 
 					onClick={this.clickTipAudi}></div>
 
-				<div className="tips_item tips_item_call"
+				<div style={{background: !call && "red"}} className="tips_item tips_item_call"
 					onClick={this.clickTipCall}></div>
 
-				{popup && <Popup show={popup_show} closePopup={this.closePopup} />}
+				{audi_show && <Audi closeAudi={this.closeAudi}/>}
 			</div>
 		)
 	}

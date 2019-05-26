@@ -3,7 +3,7 @@
 	padding: 0;
 }
 
-html, body, #root{
+html, body, #root, .wrapper{
 	height: 100%;
 }
 
@@ -12,15 +12,16 @@ html, body, #root{
   src: local('Roboto'), url(../../fonts/Roboto.woff) format('woff');
 }
 
+.font{
+	font-family: Roboto;
+	color: #fff;
+}
+
 a{
 	text-decoration: none;
 }
 
-.wrapper{
-	height: 100%;
-}
-
-.font{
-	font-family: Roboto;
-	color: #fff;
+input{
+	border: none;
+	outline: none;
 }

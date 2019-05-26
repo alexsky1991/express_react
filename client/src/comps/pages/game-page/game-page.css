@@ -63,7 +63,7 @@
 	background: red;
 }
 
-/*.game_content_answer:hover {
-	background: green;
-}*/
+.game_content_answer:hover {
+	background: blue;
+}
 

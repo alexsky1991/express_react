@@ -3,8 +3,9 @@ const app = express();
 const request = require('request');
 const fs = require('fs');
 const port = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
 
-const data = require("./data.json");
+app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -12,18 +13,48 @@ let number = 0;
 
 app.get('/express_backend', (req, res) => {
 
-	let question = data[number];
-	number++;
+	fs.readFile('data.json', (err, data) => {  
+	    if (err) console.log(err);
 
-	res.send({ 
-		express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT',
-  		data: question  
-  	});
+	    data = JSON.parse(data);
+
+	    let question = data[number];
+		number++;
+
+	    res.send({ 
+			express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT',
+	  		data: question  
+	  	});
+
+	});
+
+});
+
+app.get('/express_all', (req, res) => {
+
+	fs.readFile('data.json', (err, data) => {  
+	    if (err) console.log(err);
+
+	    data = JSON.parse(data);
+	    res.send({ data: data })
+	});
+
+});
+
+app.post('/express_post', (req, res) => {
+
+    let json = JSON.stringify(req.body.data, null, 2); 
+
+    fs.writeFile('data.json', json, 'utf8', () => {
+		console.log('The file has been saved!');
+	});
+		
 });
 
 
 const requestApi = () => (
 	request('https://engine.lifeis.porn/api/millionaire.php?q=3', (error, response, body) => {
+
 	    if (!error && response.statusCode == 200) {
 	    	let info = JSON.parse(body)
 
