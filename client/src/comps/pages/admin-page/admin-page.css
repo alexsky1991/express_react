@@ -1,4 +1,6 @@
 .admin{
+	display: flex;
+	flex-direction: column;
 	padding: 10px;
 	font-size: 13px;
 	height: 100%;
@@ -11,7 +13,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 .admin_header_amount{
@@ -36,17 +38,31 @@
 	cursor: pointer;
 }
 
+.admin_list{
+	flex: 1;
+
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+/*.admin_list:after{
+	content:'';
+	flex:1;
+}*/
+
 .admin_navigation{
 	display: flex;
 	justify-content: center;
 }
 
 .admin_navigation>div{
-	padding: 2px 7px;
+	padding: 1px 5px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     background: #171717;
-    margin: 0 5px;
+    margin: 0 3px;
     border-radius: 5px;
 }
 
