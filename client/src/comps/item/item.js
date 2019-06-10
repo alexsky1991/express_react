@@ -62,23 +62,29 @@ export default class Item extends React.Component {
 			: <div style ={{background: '#7b684a'}} className="item">
 				<div className="item_panel">
 					<div className="item_question">
-						<input type="text"
+						<textarea type="text"
 							className="item_question_input" 
 							size={item.question.length} 
 							defaultValue={item.question}
 							onBlur={this.changeQuestion}
 							/>
+
 					</div>
-					<div className="item_delete" onClick={this.deleteItem}>удалить</div>
+					<div className="item_right">
+						<div className="item_delete" onClick={this.deleteItem}>удалить</div>
 					<div className="item_edit" onClick={this.editItem}>редактировать</div>
+					</div>
+					
 				</div>
 				<div className="item_answers">
 					{item.answers.map((elem, idx) => {
+
 						return (
 							<input key={idx} 
 								number={idx}
 								className="item_answer_input"
 								defaultValue={elem}
+								style={{width: ((elem.length + 1) * 7) +'px'}}
 								onBlur={this.changeAnswer}/>
 						)
 					})}

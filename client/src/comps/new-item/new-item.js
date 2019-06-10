@@ -29,7 +29,7 @@ export default class NewItem extends React.Component {
 	render() {
  	
 		return (
-			<div style ={{background: '#7b684a'}} className="new-item item">
+			<div style ={{background: '#7b684a'}} className="item new_item">
 				<div className="item_panel">
 					<div className="item_question">
 						<input id='new_question' type="text"
