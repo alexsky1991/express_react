@@ -11,6 +11,11 @@
     left: 10px;
     right: 10px;
     box-sizing: border-box;
-    top: 57px;
+    top: 50px;
 }
 
+@media(max-width:768px) {
+	.new_item{
+		top: 48px;
+	}
+}

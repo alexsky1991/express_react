@@ -59,7 +59,7 @@ export default class Item extends React.Component {
 					})}
 				</div>
 			</div>
-			: <div style ={{background: '#7b684a'}} className="item">
+			: <div style ={{background: '#7b684a'}} className="item item_bg_edit">
 				<div className="item_panel">
 					<div className="item_question">
 						<textarea type="text"
@@ -72,7 +72,7 @@ export default class Item extends React.Component {
 					</div>
 					<div className="item_right">
 						<div className="item_delete" onClick={this.deleteItem}>удалить</div>
-					<div className="item_edit" onClick={this.editItem}>редактировать</div>
+						<div className="item_edit" onClick={this.editItem}>редактировать</div>
 					</div>
 					
 				</div>
@@ -84,7 +84,7 @@ export default class Item extends React.Component {
 								number={idx}
 								className="item_answer_input"
 								defaultValue={elem}
-								style={{width: ((elem.length + 1) * 7) +'px'}}
+								style={{width: ((elem.length + 1) * 9) +'px'}}
 								onBlur={this.changeAnswer}/>
 						)
 					})}

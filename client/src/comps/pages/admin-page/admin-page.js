@@ -25,8 +25,6 @@ export default class AdminPage extends React.Component {
 
 		this.setState({amount_items: amount_items})
 
-		console.log('height_list:', height_list,' amount_items:', amount_items)
-
 		window.onresize = () => {
 			let new_height_list = document.body.clientHeight - 83;
 
@@ -120,6 +118,8 @@ export default class AdminPage extends React.Component {
 	    let amount_pages;
 	    let items = [];
 
+	    let classAdminList = 'admin_list'
+
 	    if(amount_items) {
 		    if(data.length % amount_items === 0) {
 		    	amount_pages = data.length/amount_items;
@@ -127,7 +127,14 @@ export default class AdminPage extends React.Component {
 		    	amount_pages = data.length/amount_items + 1;
 		    }
 
+		    amount_pages = Math.floor(amount_pages);
+
+		    if(page === amount_pages) 
+				classAdminList += ' admin_list_last'
+
+
 		    for (var i = 1; i <= amount_pages; i++) {
+				
 		        items.push(<div key={i} className="admin_navigation_item" 
 		            style={{background: page===i ? '#656464':''}}>{i}</div>)
 		    } 
@@ -143,7 +150,7 @@ export default class AdminPage extends React.Component {
 
 				{new_item && <NewItem addItem={this.addItem} deleteNewItem={this.deleteNewItem}/>}
 				
-				<div className="admin_list">
+				<div className={classAdminList}>
 
 					{amount_items && data.slice(number, number + amount_items).map((el, idx) => <Item key={el.id} item={el} changeData={this.changeData} deleteItem={this.deleteItem}/>)}
 

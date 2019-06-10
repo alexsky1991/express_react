@@ -23,6 +23,10 @@ export default class GamePage extends React.Component {
     	this.callBackendAPI()
         	.then(res => {
         		let right = res.data.answers[0];
+        		console.log(res.data.answers);
+
+        		voteEvent.emit('sendRightAnswer', right);
+
         		let answers = res.data.answers.sort(() => 0.5 - Math.random());
 
         		return (
@@ -51,7 +55,7 @@ export default class GamePage extends React.Component {
 
   	clickItem = e => {
 
-  		let elem = e.target
+  		let elem = e.target;
 
   		if(elem.innerHTML === '')
   			return;
@@ -72,9 +76,15 @@ export default class GamePage extends React.Component {
 
 						voteEvent.emit('nextRound');
 
+						if(pos === 15) {
+							setTimeout(() => alert('вы победили'), 1000);
+							pos = 0;
+						}
+
 	        		} else {
 	        			elem.className = "game_content_answer answer_false";
 	        			pos = 0;
+						setTimeout(() => alert('вы проиграли'), 1000);
 
 	        			voteEvent.emit('loseGame');
 
@@ -87,6 +97,10 @@ export default class GamePage extends React.Component {
   					this.callBackendAPI()
 			        	.then(res => {
 			        		let right = res.data.answers[0];
+			        		console.log(res.data.answers);
+
+							voteEvent.emit('sendRightAnswer', right);
+
 			        		let answers = res.data.answers.sort(() => 0.5 - Math.random());
 
 			        		return (
@@ -128,6 +142,18 @@ export default class GamePage extends React.Component {
 
 	}
 
+	getMoney = () => {
+		if(this.state.pos > 4)
+			alert('ваш выигрыш 1000')
+
+		if(this.state.pos > 9)
+			alert('ваш выигрыш 32000')
+
+		this.setState({pos: 0})
+
+		voteEvent.emit('loseGame');
+	}
+
 	
 	render() {
 		const { pos, answers, question } = this.state;
@@ -140,6 +166,14 @@ export default class GamePage extends React.Component {
 						<Bar pos={pos} />
 
 						<div className="game_main_bg"></div>
+						{pos > 4 &&
+							<div className="game_money_wrapper">
+								<div className="game_money" onClick={this.getMoney}>Забрать деньги</div>
+								<div className="game_money_transport">{pos > 9 ? '32000': '1000'}</div>
+							</div>
+							
+						}
+						
 					</div>
 					
 					<div className="game_footer">

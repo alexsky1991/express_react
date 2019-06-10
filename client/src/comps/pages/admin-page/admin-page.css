@@ -25,9 +25,9 @@
 
 .admin_title{
 	background: #a09937;
-    padding: 7px 10px;
+    padding: 5px 7px;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .admin_new{
@@ -38,6 +38,10 @@
 	cursor: pointer;
 }
 
+.admin_new:hover{
+	background: #3da08b;
+}
+
 .admin_list{
 	flex: 1;
 
@@ -45,6 +49,10 @@
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 10px;
+}
+
+.admin_list_last{
+	justify-content: flex-start;
 }
 
 /*.admin_list:after{
@@ -58,12 +66,30 @@
 }
 
 .admin_navigation>div{
-	padding: 1px 5px;
+	padding: 2px 7px;
     cursor: pointer;
     font-size: 14px;
     background: #171717;
     margin: 0 3px;
     border-radius: 5px;
+}
+
+.admin_navigation_item:hover{
+	background: #907b7b;
+}
+
+@media(max-width:768px) {
+	.admin_header_amount,
+	.admin_new,
+	.admin_title{
+		font-size: 11px;
+	}
+}
+
+@media(max-width:480px) {
+	.admin_title{
+		display: none;
+	}
 }
 
 

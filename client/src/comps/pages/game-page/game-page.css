@@ -12,7 +12,7 @@
 
 .game_main_bg{
 	flex: 1;
-	background: url(./img/bg.jpg) no-repeat center;
+	/*background: url(./img/bg.jpg) no-repeat center;*/
 }
 
 .game_footer{
@@ -49,6 +49,29 @@
 	border-radius: 10px;
 	cursor: pointer;
 	background: #2A06CE;
+}
+
+.game_money_wrapper{
+	align-self: flex-start;
+	text-align: center;
+	margin: 50px;
+}
+
+.game_money{
+	margin-bottom: 10px;
+	padding: 7px 14px;
+    background: green;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.game_money_transport{
+	display: inline-block;
+	padding: 7px 15px;
+    background: #008062;
+    border-radius: 10px;
+    font-size: 13px;
 }
 
 .answer_choose{

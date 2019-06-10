@@ -38,8 +38,10 @@ export default class NewItem extends React.Component {
 							placeholder="новый вопрос"
 							/>
 					</div>
-					<div className="item_delete" onClick={this.deleteItem}>удалить</div>
-					<div className="item_edit" onClick={this.saveItem}>добавить</div>
+					<div className="item_right">
+						<div className="item_delete" onClick={this.deleteItem}>удалить</div>
+						<div className="item_edit" onClick={this.saveItem}>добавить</div>
+					</div>
 				</div>
 				<div id="item_answers" className="item_answers">
 					<input type="text" className="item_answer_input"
