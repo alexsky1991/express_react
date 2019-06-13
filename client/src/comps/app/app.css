@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0;
 	user-select: none;
-	transition: .2s all;
+	transition: .3s all;
 }
 
 html, body, #root, .wrapper{
@@ -21,6 +21,7 @@ html, body, #root, .wrapper{
 
 a{
 	text-decoration: none;
+	color: #fff;
 }
 
 input{

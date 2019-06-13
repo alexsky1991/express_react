@@ -3,6 +3,8 @@ import React from 'react';
 import Item from '../../item';
 import NewItem from '../../new-item';
 
+import { Link } from 'react-router-dom';
+
 import './admin-page.css';
 
 
@@ -10,28 +12,31 @@ export default class AdminPage extends React.Component {
 
   state = {
 	    data: [],
-		  new_item: false,
-		  page: 1,
-		  amount_items:''
+		new_item: false,
+		page: parseInt(this.props.match.params.clid),
+		amount_items:[]
 	}
 	
 
 	componentDidMount() {
+
+		if(!document.getElementsByClassName('admin_list')[0])
+			return;
+
 		let admin_list = document.getElementsByClassName('admin_list')[0];
 
 		let height_list = admin_list.offsetHeight;
 
 		let amount_items = Math.floor(height_list / 82);
 
-		this.setState({amount_items: amount_items})
+		this.setState({amount_items: amount_items});
 
 		window.onresize = () => {
 			let new_height_list = document.body.clientHeight - 83;
 
-			
 			amount_items = Math.floor(new_height_list/ 82);
 
-			this.setState({amount_items: amount_items})
+			this.setState({amount_items: amount_items});
 			
 		}
 
@@ -40,6 +45,12 @@ export default class AdminPage extends React.Component {
         		this.setState({data: res.data})
         	})
         	.catch(err => console.log(err));
+	}
+
+	componentDidUpdate() {
+		if(this.state.page !== parseInt(this.props.match.params.clid)) 
+			this.setState({page: parseInt(this.props.match.params.clid)})
+		
 	}
 
 
@@ -74,7 +85,8 @@ export default class AdminPage extends React.Component {
 
 		new_arr = new_arr.filter(el => el.id !== id);
 
-		this.setState({data: new_arr}, this.postData)
+		this.setState({data: new_arr}, this.postData);
+
 	}
 
 	addItem = item => {
@@ -98,13 +110,13 @@ export default class AdminPage extends React.Component {
 
 	postData = () => {
 		fetch('/express_post', {method: 'POST', body: JSON.stringify({
-		data: this.state.data
-	}),headers:{'content-type': 'application/json'}})
+			data: this.state.data
+		}),headers:{'content-type': 'application/json'}})
 	}
 
 	changeNavigation = e => {
 		if(e.target.className !== 'admin_navigation_item')
-			return
+			return;
 
 		this.setState({page: +e.target.innerHTML})
 	}
@@ -118,7 +130,7 @@ export default class AdminPage extends React.Component {
 	    let amount_pages;
 	    let items = [];
 
-	    let classAdminList = 'admin_list'
+	    let classAdminList = 'admin_list';
 
 	    if(amount_items) {
 		    if(data.length % amount_items === 0) {
@@ -127,16 +139,21 @@ export default class AdminPage extends React.Component {
 		    	amount_pages = data.length/amount_items + 1;
 		    }
 
+		    if(page > amount_pages) {
+		    	return <div className="admin_not-page">
+		    				<div>Page not found</div>
+		    				<div className="admin_not_found_img"></div>
+		    			</div>
+		    }
+
 		    amount_pages = Math.floor(amount_pages);
 
 		    if(page === amount_pages) 
 				classAdminList += ' admin_list_last'
 
-
 		    for (var i = 1; i <= amount_pages; i++) {
-				
-		        items.push(<div key={i} className="admin_navigation_item" 
-		            style={{background: page===i ? '#656464':''}}>{i}</div>)
+		        items.push(<Link to={`/admin/${i}`}  key={i} className="admin_navigation_item" 
+		            style={{background: page===i ? '#656464':''}}>{i}</Link>)
 		    } 
 		}
 	   
@@ -147,12 +164,17 @@ export default class AdminPage extends React.Component {
 					<div className="admin_title">Cписок вопросов:</div>
 					<div className="admin_new" onClick={this.showNewItem}>Добавить вопрос</div>
 				</div>
-
-				{new_item && <NewItem addItem={this.addItem} deleteNewItem={this.deleteNewItem}/>}
 				
+
+		        {new_item &&<NewItem addItem={this.addItem} deleteNewItem={this.deleteNewItem}/>}
+
+										
 				<div className={classAdminList}>
 
-					{amount_items && data.slice(number, number + amount_items).map((el, idx) => <Item key={el.id} item={el} changeData={this.changeData} deleteItem={this.deleteItem}/>)}
+					{amount_items && data.slice(number, number + amount_items).map((el, idx) => {
+						return <Item key={el.id} item={el} idx={idx} changeData={this.changeData} deleteItem={this.deleteItem}/>
+						})
+					}
 
 				</div>
 				<div className="admin_navigation" onClick={this.changeNavigation}>

@@ -168,8 +168,7 @@ export default class GamePage extends React.Component {
 						<div className="game_main_bg"></div>
 						{pos > 4 &&
 							<div className="game_money_wrapper">
-								<div className="game_money" onClick={this.getMoney}>Забрать деньги</div>
-								<div className="game_money_transport">{pos > 9 ? '32000': '1000'}</div>
+								<div className="game_money" onClick={this.getMoney}>Забрать деньги {pos > 9 ? '32000': '1000'}</div>
 							</div>
 							
 						}

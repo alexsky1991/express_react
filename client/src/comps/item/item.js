@@ -37,8 +37,14 @@ export default class Item extends React.Component {
 		this.setState({item: new_item}, () => this.props.changeData(this.state.item));
 	}
 
-	deleteItem = () => {
-		this.props.deleteItem(this.state.item.id)
+	deleteItem = e => {
+		let item = e.target.closest('.item');
+		item.className += ' item_hide';
+
+		setTimeout(() => {
+			this.props.deleteItem(this.state.item.id)
+		}, 600)
+		
 	}
 
 	render() {
@@ -46,7 +52,7 @@ export default class Item extends React.Component {
 		const { active, item } = this.state;
  	
 		return (
-			!active ? <div  className="item">
+			!active ? <div  className="item" style={{animationDelay: `${this.props.idx/20}s`}} >
 				<div className="item_panel">
 					<div className="item_question">{item.question}</div>
 					<div className="item_edit" onClick={this.editItem}>редактировать</div>

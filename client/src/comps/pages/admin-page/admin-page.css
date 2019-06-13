@@ -42,12 +42,33 @@
 	background: #3da08b;
 }
 
+.admin_not-page{
+	height: 100%;
+	width:100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	background: #fff;
+	color: #000;
+	font-size: 25px;
+}
+
+.admin_not_found_img{
+	width: 400px;
+	height: 400px;
+	background: url(./img/smile.jpg) no-repeat center;
+	background-size: cover;
+}
+
 .admin_list{
 	flex: 1;
 
 	display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-bottom: 10px;
 }
 
@@ -65,7 +86,7 @@
 	justify-content: center;
 }
 
-.admin_navigation>div{
+.admin_navigation_item{
 	padding: 2px 7px;
     cursor: pointer;
     font-size: 14px;
@@ -78,6 +99,23 @@
 	background: #907b7b;
 }
 
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
 @media(max-width:768px) {
 	.admin_header_amount,
 	.admin_new,
@@ -89,6 +127,10 @@
 @media(max-width:480px) {
 	.admin_title{
 		display: none;
+	}
+
+	.admin_navigation>div {
+		padding: 2px 3px;
 	}
 }
 

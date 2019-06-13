@@ -52,10 +52,23 @@ export default class Tips extends React.Component {
 	}
 
 	closeAudi = () => {
-		this.setState({
-			audi_show: false,
-			call_show: false
-		})
+
+		let tip_audi = document.getElementsByClassName('tip_audi')[0];
+		tip_audi.className += " tip_audi_hide";
+		
+		setTimeout(() => {
+			this.setState({audi_show: false})
+		}, 1200);
+		
+	}
+
+	closeCall = () => {
+		let tip_call = document.getElementsByClassName('tip_call')[0];
+		tip_call.className += " tip_call_hide";
+
+		setTimeout(() => {
+			this.setState({call_show: false})
+		}, 3000);
 	}
 
 	componentDidMount() {
@@ -64,7 +77,8 @@ export default class Tips extends React.Component {
 				fifty: true,
 				audi: true,
 				call: true,
-				audi_show: false
+				audi_show: false,
+				call_show: false
 			})
 		})
 
@@ -92,6 +106,7 @@ export default class Tips extends React.Component {
 		if(!audi) classNameAudi += " reject" 
 		if(!call) classNameCall += " reject" 
 
+
 		return (
 			<div className="tips">
 				<div id="tip50" className={className50} 
@@ -103,17 +118,23 @@ export default class Tips extends React.Component {
 				<div className={classNameCall}
 					onClick={this.clickTipCall}></div>
 
-				{audi_show && 
-					<div className="tip_window tip_audi">
-						аудитория думает что правильный ответ: {
-							this.rightAnswer
-						}
-					</div>}
-				{call_show && 
-					<div className="tip_window tip_call">
-						ваш товарищ думает что правильный ответ: {this.rightAnswer}
-					</div>
-				}
+				<div className="tip_wrapper_window">
+
+					{audi_show && 
+						<div className="tip_window tip_audi">
+							аудитория думает что правильный ответ: <br/>
+							<span className="tip_answer">{this.rightAnswer}</span>
+							<span className="tip_close" onClick={this.closeAudi}>&times;</span>
+						</div>}
+					{call_show && 
+						<div className="tip_window tip_call">
+							ваш товарищ думает что правильный ответ: <br/>
+							<span className="tip_answer">{this.rightAnswer}</span>
+							<span className="tip_close" onClick={this.closeCall}>&#215;</span>
+						</div>
+					}
+
+				</div>
 			</div>
 		)
 	}

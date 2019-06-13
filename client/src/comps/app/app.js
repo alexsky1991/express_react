@@ -16,7 +16,8 @@ export default class App extends React.Component{
 				<Router>
 					{/*<Route path="/" component={FirstPage} exact/>*/}
 					<Route path="/" exact component={GamePage}/>
-					<Route path="/admin" component={AdminPage}/>
+					{/*<Route path="/admin" component={AdminPage}/>*/}
+					<Route path="/admin/:clid" component={AdminPage}/>
 				</Router>
 			</div>
 		)

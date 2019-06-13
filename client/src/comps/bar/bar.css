@@ -1,7 +1,7 @@
 .bar{
 	display: flex;
 	flex-direction: column;
-	width: 300px;
+	width: 320px;
 }
 
 .bar_levels{
@@ -81,4 +81,26 @@
 	text-align: right;
 	width: 20px;
 	margin-right: 30px;
+}
+
+@media (max-width:480px) {
+    .bar {
+        width: 100%;
+    }
+    
+    .bar_level{
+        font-size: 13px;
+        height: 15px;
+    }
+
+    .bar_level_active{
+        background: #E19F2E;
+    }
+
+    .bar_level_active .bar_level_content:before,
+    .bar_level_active .bar_level_content:after,
+    .bar_level_active .bar_level_amount:before,
+    .bar_level_active .bar_level_amount:after {
+        display: none;
+    }
 }
