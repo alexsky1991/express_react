@@ -5,6 +5,8 @@ import NewItem from '../../new-item';
 
 import { Link } from 'react-router-dom';
 
+import {addEl} from '../../../modules/addEl'
+
 import './admin-page.css';
 
 
@@ -90,9 +92,9 @@ export default class AdminPage extends React.Component {
 	}
 
 	addItem = item => {
-		let new_arr = [...this.state.data];
+		console.log(item);
 
-		new_arr.unshift(item);
+		let new_arr = addEl(item, this.state.data);
 
 		this.setState({
 			data: new_arr,
