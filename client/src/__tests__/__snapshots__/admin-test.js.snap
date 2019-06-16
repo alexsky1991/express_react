@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`работа Item 1`] = `
+<div
+  className="item"
+  style={
+    Object {
+      "animationDelay": "0.05s",
+    }
+  }
+>
+  <div
+    className="item_panel"
+  >
+    <div
+      className="item_question"
+    >
+      C каким из этих государств Россия не имеет сухопутной границы?
+    </div>
+    <div
+      className="item_edit"
+      onClick={[Function]}
+    >
+      редактировать
+    </div>
+  </div>
+  <div
+    className="item_answers"
+  >
+    <div
+      className="item_answer"
+    >
+      Таджикистан
+    </div>
+    <div
+      className="item_answer"
+    >
+      Норвегия
+    </div>
+    <div
+      className="item_answer"
+    >
+      Польша
+    </div>
+    <div
+      className="item_answer"
+    >
+      КНДР
+    </div>
+  </div>
+</div>
+`;
+
+exports[`работа Item 2`] = `
+<div
+  className="item item_bg_edit"
+  style={
+    Object {
+      "background": "#7b684a",
+    }
+  }
+>
+  <div
+    className="item_panel"
+  >
+    <div
+      className="item_question"
+    >
+      <textarea
+        className="item_question_input"
+        defaultValue="C каким из этих государств Россия не имеет сухопутной границы?"
+        onBlur={[Function]}
+        size={62}
+        type="text"
+      />
+    </div>
+    <div
+      className="item_right"
+    >
+      <div
+        className="item_delete"
+        onClick={[Function]}
+      >
+        удалить
+      </div>
+      <div
+        className="item_edit"
+        onClick={[Function]}
+      >
+        редактировать
+      </div>
+    </div>
+  </div>
+  <div
+    className="item_answers"
+  >
+    <input
+      className="item_answer_input"
+      defaultValue="Таджикистан"
+      number={0}
+      onBlur={[Function]}
+      style={
+        Object {
+          "width": "108px",
+        }
+      }
+    />
+    <input
+      className="item_answer_input"
+      defaultValue="Норвегия"
+      number={1}
+      onBlur={[Function]}
+      style={
+        Object {
+          "width": "81px",
+        }
+      }
+    />
+    <input
+      className="item_answer_input"
+      defaultValue="Польша"
+      number={2}
+      onBlur={[Function]}
+      style={
+        Object {
+          "width": "63px",
+        }
+      }
+    />
+    <input
+      className="item_answer_input"
+      defaultValue="КНДР"
+      number={3}
+      onBlur={[Function]}
+      style={
+        Object {
+          "width": "45px",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`работа adminPage 1`] = `
+<div
+  className="admin"
+>
+  <div
+    className="admin_header"
+  >
+    <div
+      className="admin_header_amount"
+    >
+      Количество вопросов: 
+      0
+    </div>
+    <div
+      className="admin_title"
+    >
+      Cписок вопросов:
+    </div>
+    <div
+      className="admin_new"
+      onClick={[Function]}
+    >
+      Добавить вопрос
+    </div>
+  </div>
+  <div
+    className="admin_list"
+  />
+  <div
+    className="admin_navigation"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`работа adminPage 2`] = `
+<div
+  className="admin"
+>
+  <div
+    className="admin_header"
+  >
+    <div
+      className="admin_header_amount"
+    >
+      Количество вопросов: 
+      0
+    </div>
+    <div
+      className="admin_title"
+    >
+      Cписок вопросов:
+    </div>
+    <div
+      className="admin_new"
+      onClick={[Function]}
+    >
+      Добавить вопрос
+    </div>
+  </div>
+  <div
+    className="item new_item"
+    style={
+      Object {
+        "background": "#7b684a",
+      }
+    }
+  >
+    <div
+      className="item_panel"
+    >
+      <div
+        className="item_question"
+      >
+        <input
+          className="item_question_input"
+          id="new_question"
+          placeholder="новый вопрос"
+          size="50"
+          type="text"
+        />
+      </div>
+      <div
+        className="item_right"
+      >
+        <div
+          className="item_delete"
+          onClick={[Function]}
+        >
+          удалить
+        </div>
+        <div
+          className="item_edit"
+          onClick={[Function]}
+        >
+          добавить
+        </div>
+      </div>
+    </div>
+    <div
+      className="item_answers"
+      id="item_answers"
+    >
+      <input
+        className="item_answer_input"
+        placeholder="вариант 1"
+        type="text"
+      />
+      <input
+        className="item_answer_input"
+        placeholder="вариант 2"
+        type="text"
+      />
+      <input
+        className="item_answer_input"
+        placeholder="вариант 3"
+        type="text"
+      />
+      <input
+        className="item_answer_input"
+        placeholder="вариант 4"
+        type="text"
+      />
+    </div>
+  </div>
+  <div
+    className="admin_list"
+  />
+  <div
+    className="admin_navigation"
+    onClick={[Function]}
+  />
+</div>
+`;

@@ -1,3 +1,0 @@
-
-import {addEl} from '../modules/';
-

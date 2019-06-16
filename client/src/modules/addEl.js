@@ -1,9 +1,9 @@
 
 const addEl = (item, arr) => {
-	arr = [...arr];
-	arr.unshift(item);
+	let new_arr = [...arr];
+	new_arr.unshift(item);
 
-	return arr;
+	return new_arr;
 }
 
 export {addEl}

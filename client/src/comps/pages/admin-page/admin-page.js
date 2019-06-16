@@ -1,18 +1,21 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Item from '../../item';
 import NewItem from '../../new-item';
 
 import { Link } from 'react-router-dom';
 
-import {addEl} from '../../../modules/addEl'
+import {addEl, deleteEl,changeEl} from '../../../modules';
 
 import './admin-page.css';
 
+import { questionsLoadingAC, questionsErrorAC, questionsSetAC } from "../../../redux/questionsAC";
 
-export default class AdminPage extends React.Component {
 
-  state = {
+class AdminPage extends React.Component {
+
+    state = {
 	    data: [],
 		new_item: false,
 		page: parseInt(this.props.match.params.clid),
@@ -22,14 +25,9 @@ export default class AdminPage extends React.Component {
 
 	componentDidMount() {
 
-		if(!document.getElementsByClassName('admin_list')[0])
-			return;
+		this.props.dispatch( questionsLoadingAC() );
 
-		let admin_list = document.getElementsByClassName('admin_list')[0];
-
-		let height_list = admin_list.offsetHeight;
-
-		let amount_items = Math.floor(height_list / 82);
+		let amount_items = Math.floor((document.body.clientHeight - 80) / 82);
 
 		this.setState({amount_items: amount_items});
 
@@ -44,17 +42,22 @@ export default class AdminPage extends React.Component {
 
     	this.callBackendAPI()
         	.then(res => {
+        		this.props.dispatch( questionsSetAC(res.data) )
         		this.setState({data: res.data})
         	})
-        	.catch(err => console.log(err));
+        	.catch(err => {
+        		this.props.dispatch( questionsErrorAC() );
+        		console.log(err)
+        	});
 	}
 
 	componentDidUpdate() {
+		if(!this.props.match.params.clid)
+			return
+
 		if(this.state.page !== parseInt(this.props.match.params.clid)) 
 			this.setState({page: parseInt(this.props.match.params.clid)})
-		
 	}
-
 
 	callBackendAPI = async () => {
 
@@ -66,34 +69,21 @@ export default class AdminPage extends React.Component {
       	
     	return body;
 
-  }
+    }
 
-  changeData = item => {
-
-		let new_arr = [...this.state.data];
-
-		new_arr = new_arr.map(el => {
-			if(el.id === item.id)
-				el = item
-
-			return el
-		})
+    changeData = item => {
+    	let new_arr = changeEl(item, this.state.data)
 
 		this.setState({data: new_arr}, this.postData);
 	}
 
 	deleteItem = (id) => {
-		let new_arr = [...this.state.data];
-
-		new_arr = new_arr.filter(el => el.id !== id);
+		let new_arr = deleteEl(id, this.state.data);
 
 		this.setState({data: new_arr}, this.postData);
-
 	}
 
 	addItem = item => {
-		console.log(item);
-
 		let new_arr = addEl(item, this.state.data);
 
 		this.setState({
@@ -124,6 +114,8 @@ export default class AdminPage extends React.Component {
 	}
 	
 	render() {
+		if ( this.props.questions.status<=1 ) 
+     	 		return <p style={{color:'red'}}>"загрузка..."</p>
 
 		const { data, new_item, page, amount_items } = this.state;
 
@@ -141,9 +133,9 @@ export default class AdminPage extends React.Component {
 		    	amount_pages = data.length/amount_items + 1;
 		    }
 
-		    if(page > amount_pages) {
+		    if(this.props.questions.status===2) {
 		    	return <div className="admin_not-page">
-		    				<div>Page not found</div>
+		    				<div>ошибка загрузки данных</div>
 		    				<div className="admin_not_found_img"></div>
 		    			</div>
 		    }
@@ -172,8 +164,8 @@ export default class AdminPage extends React.Component {
 
 										
 				<div className={classAdminList}>
-
 					{amount_items && data.slice(number, number + amount_items).map((el, idx) => {
+
 						return <Item key={el.id} item={el} idx={idx} changeData={this.changeData} deleteItem={this.deleteItem}/>
 						})
 					}
@@ -186,3 +178,12 @@ export default class AdminPage extends React.Component {
 		)
 	}
 }
+
+const mapStateToProps = function (state) {
+
+  return {
+    questions: state.questions,
+  };
+};
+
+export default connect(mapStateToProps)(AdminPage);
