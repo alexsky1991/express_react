@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.1",
+    "lite-server": "^2.5.3",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-addons-css-transition-group": "^15.6.2",
