@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.74daa276.chunk.css",
-    "main.js": "/static/js/main.69dc0ab2.chunk.js",
-    "main.js.map": "/static/js/main.69dc0ab2.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.d9d7c35c.chunk.js": "/static/js/2.d9d7c35c.chunk.js",
-    "static/js/2.d9d7c35c.chunk.js.map": "/static/js/2.d9d7c35c.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.85446b817135530d61ff2453e792736e.js": "/precache-manifest.85446b817135530d61ff2453e792736e.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.74daa276.chunk.css.map": "/static/css/main.74daa276.chunk.css.map",
-    "static/media/app.css": "/static/media/Roboto.58bf8e0b.woff",
-    "static/media/first-page.css": "/static/media/bg.8122c517.jpg",
-    "static/media/admin-page.css": "/static/media/smile.c1f64763.jpg"
+    "main.css": "/game/static/css/main.5b216ab6.chunk.css",
+    "main.js": "/game/static/js/main.12502c79.chunk.js",
+    "main.js.map": "/game/static/js/main.12502c79.chunk.js.map",
+    "runtime~main.js": "/game/static/js/runtime~main.2d0fbc73.js",
+    "runtime~main.js.map": "/game/static/js/runtime~main.2d0fbc73.js.map",
+    "static/js/2.d9d7c35c.chunk.js": "/game/static/js/2.d9d7c35c.chunk.js",
+    "static/js/2.d9d7c35c.chunk.js.map": "/game/static/js/2.d9d7c35c.chunk.js.map",
+    "index.html": "/game/index.html",
+    "precache-manifest.33f47b0a6257affdf06b7552f29f60a4.js": "/game/precache-manifest.33f47b0a6257affdf06b7552f29f60a4.js",
+    "service-worker.js": "/game/service-worker.js",
+    "static/css/main.5b216ab6.chunk.css.map": "/game/static/css/main.5b216ab6.chunk.css.map",
+    "static/media/app.css": "/game/static/media/Roboto.58bf8e0b.woff",
+    "static/media/game-page.css": "/game/static/media/bg.481beeb1.jpg",
+    "static/media/first-page.css": "/game/static/media/bg.8122c517.jpg",
+    "static/media/admin-page.css": "/game/static/media/smile.c1f64763.jpg"
   }
 }
